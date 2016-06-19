@@ -1,0 +1,88 @@
+mvn的目录结构
+src
+	-main
+		-java
+			-package
+	-test
+		-java
+			-package
+	-resource 用于存放资源文件
+
+mvn -v 查看maven版本
+	compile 编译
+	test 测试
+	package 打包项目
+	clean 删除target
+	install 安装jar包到本地仓库中
+	
+创建目录的两种方式：
+1、archetype:generate 安装提示进行选择
+2、archetype:generate -DgroupId=组织名
+					-DartifactId=项目名-模块名
+					-Dversion=版本号
+					-Dpackage=代码所在的包名
+					
+maven中的坐标和仓库
+	-坐标
+		-构件
+	-仓库
+		-本地仓库和远程仓库
+		全球仓库地址：https://repo.maven.apache.org/maven2
+	-镜像仓库
+	-更改仓库位置
+		-默认存在：.m2-->repository
+		-修改setttings.xml
+		
+在eclipse中安装maven插件以及创建maven项目
+
+maven生命周期和插件
+	-完整的项目构建过程包括：清理、编译、测试、打包、集成测试、验证、部署
+	-maven生命周期：
+		-clean：清理项目
+			pre-clean：执行清理前的工作
+			clean：清理上一次构建生成的所有文件
+			post-clean：执行清理后的文件
+		-default：构建项目（最核心）
+			compile、、test、package、install
+		-site：生成项目站点
+		
+pom.xml常用元素
+	-modelVersion：指定当前pom版本，固定4.0.0
+	-groupId：主项目的标识，用来定义maven属于哪个实际的项目。一般用“反写的公司网址+项目名”组成
+	-artifactId：模块的标识。一般用“项目名+模块名”标识
+	-version：当前版本号
+		第一个0表示大版本号，第二个0表示分支版本号，第三个0表示小版本号
+		snapshot-快照、alpha-内测、beta-公测、release-稳定、GA-正式发布
+	-packing：maven项目打包的方式，默认是jar
+	-name：项目的描述名
+	-url：项目的地址
+	-description：项目描述
+	-developers：开发人员列表
+	-license：许可证信息
+	-organization：组织信息
+
+	-dependencies：依赖项
+		-dependency
+			-groupId
+			-artifactId
+			-version
+			-type
+			-scope：依赖范围
+			-optional：设置依赖是否可选，默认false
+			-exclusions：排除依赖传递依赖
+				-exclusion
+				
+	-dependencyManagement：依赖管理
+		-dependencies
+			-dependency
+			
+	-bulid
+		-plugins：插件列表
+			-plugin
+				-groupId
+				-artifactId
+				-version
+	
+	-parent
+	-modules
+		module

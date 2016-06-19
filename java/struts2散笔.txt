@@ -1,0 +1,42 @@
+struts2散笔
+
+struts2工作原理及文件结构
+Web项目--> 过滤器
+HttpServletRequest发送请求 --> ActionContextCleanUp(可选,用于和其他过滤器集成) --> Other filter(SiteMesh, etc) --> FilterDispatcher(2.0-2.1.2核心过滤器) - StrutsPrepareAndExecuteFilter(2.1.3后的核心过滤器) --> ActionMapper --> StrutsPrepareAndExecuteFilter --> ActionProxy -(Configuration Manager)-> Action Invocation --> interceptor --> result(jsp、freemaker、etc) --> interceptor --> HttpServletResponse
+
+核心文件：
+1、web.xml：负责加载StrutsPrepareAndExcuteFilter
+2、struts.xml：全局属性、action和result的对应关系、interceptor、Action可能用到的参数和返回的结果
+3、struts.properties：struts2框架的全局属性文件，自动加载。该文件可以配置在struts.xml文件中，利用constant元素。
+
+struts2拦截器：
+拦截器简述：每个拦截器完成某项功能、拦截器在action执行之前或之后执行。
+拦截器栈：由多个拦截器组成，用法一样。
+拦截器工作原理：递归式工作
+
+自定义拦截器：
+1、实现Interceptor接口
+	- void init()：初始化拦截器资源
+	- void destory()：释放init()中分配的资源
+	- String intercept(ActionInvocation ai) throws Exception
+		.实现拦截器功能
+		.利用ActionInvocation参数获取Action状态
+		.返回result字符串作为逻辑视图
+2、继承AbstractInterceptor类
+	- 空实现了init()和destory()方法
+	- 实现intercept(ActionInvocation ai)方法即可
+	
+struts内置拦截器
+	-params拦截器
+		-负责将请求参数设置为Action属性
+	-staticParams拦截器
+		-将配置文件中action元素和子元素param参数设置为Action属性
+	-servletConfig拦截器
+		-将源于Servlet API的各种对象注入到Action，必须实现对应接口
+	-fileUpload拦截器
+		-对文件上传提供支持，将文件和元数据设置到对应的Action属性
+	-exception拦截器
+		-捕获异常，并且将异常映射到用户自定义的错误页面
+	-validation拦截器
+		-调用验证框架进行数据校验
+**当为包中的某个action显示指定了某个拦截器，则默认拦截器不起作用
