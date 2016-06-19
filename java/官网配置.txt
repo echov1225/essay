@@ -1,5 +1,5 @@
-logbackÅäÖÃ£ºhttp://logback.qos.ch/manual/configuration.html
+logbacké…ç½®ï¼šhttp://logback.qos.ch/manual/configuration.html
 
-springÅäÖÃ£ºhttp://docs.spring.io/spring/docs
+springé…ç½®ï¼šhttp://docs.spring.io/spring/docs
 
-mybatisÅäÖÃ£ºhttp://mybatis.github.io/mybatis-3/zh/index.html
+mybatisé…ç½®ï¼šhttp://mybatis.github.io/mybatis-3/zh/index.html
